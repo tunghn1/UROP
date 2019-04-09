@@ -1,0 +1,8 @@
+#!/bin/bash
+
+defects4j checkout -p Closure -v 1b -w /home/tunghn1/closure_buggy
+defects4j checkout -p Lang -v 1b -w /home/tunghn1/lang_buggy
+defects4j checkout -p Math -v 1b -w /home/tunghn1/math_buggy
+defects4j checkout -p Mockito -v 1b -w /home/tunghn1/mockito_buggy
+defects4j checkout -p Time -v 1b -w /home/tunghn1/time_buggy
+defects4j checkout -p Chart -v 1b -w /home/tunghn1/chart_buggy

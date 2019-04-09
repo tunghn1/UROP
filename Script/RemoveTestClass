@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cd /home/tunghn1/time_buggy/src
+rm -rf test
+
+cd /home/tunghn1/mockito_buggy
+rm -rf test
+
+cd /home/tunghn1/math_buggy/src
+rm -rf test
+
+cd /home/tunghn1/lang_buggy/src
+rm -rf test
+
+cd /home/tunghn1/closure_buggy
+rm -rf test
+
+cd /home/tunghn1/chart_buggy
+rm -rf tests
