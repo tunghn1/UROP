@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# cd /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor
+# python main.py -i /home/tunghn1/JarFiles/
+
+cd /home/tunghn1/Inf199/PathComplexity/scripts
+./complexities /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/chart > /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/chart.csv
+./complexities /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/closure > /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/closure.csv
+./complexities /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/lang > /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/lang.csv
+./complexities /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/math > /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/math.csv
+./complexities /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/mockito > /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/mockito.csv
+./complexities /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/time > /home/tunghn1/Inf199/PathComplexity/scripts/cfgextractor/outputs/time.csv

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# # Compile all files
+# cd /home/tunghn1/time_buggy
+# defects4j compile
+
+# cd /home/tunghn1/mockito_buggy
+# defects4j compile
+
+# cd /home/tunghn1/math_buggy
+# defects4j compile
+
+# cd /home/tunghn1/lang_buggy
+# defects4j compile
+
+# cd /home/tunghn1/closure_buggy
+# defects4j compile
+
+# cd /home/tunghn1/chart_buggy
+# defects4j compile
+
+# Generate jar files 
+cd /home/tunghn1/chart_buggy/build/org
+jar cvf chart.jar jfree
+mv chart.jar /home/tunghn1/JarFiles
+
+cd /home/tunghn1/closure_buggy/build/classes/
+jar cvf closure.jar com
+mv closure.jar /home/tunghn1/JarFiles
+
+cd /home/tunghn1/lang_buggy/target/classes/org/apache/commons
+jar cvf lang.jar lang3
+mv lang.jar /home/tunghn1/JarFiles
+
+cd /home/tunghn1/math_buggy/target/classes/org/apache/commons
+jar cvf math.jar math3
+mv math.jar /home/tunghn1/JarFiles
+
+cd /home/tunghn1/mockito_buggy/build/classes/main/org
+jar cvf mockito.jar mockito 
+mv mockito.jar /home/tunghn1/JarFiles
+
+cd /home/tunghn1/time_buggy/target/classes/org/joda
+jar cvf time.jar time 
+mv time.jar /home/tunghn1/JarFiles
