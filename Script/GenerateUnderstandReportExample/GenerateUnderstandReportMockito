@@ -1,0 +1,59 @@
+#!/bin/bash
+
+BUGGY_DIR="/auto/ugrad_space/tunghn1/Buggy/"
+FIXED_DIR="/auto/ugrad_space/tunghn1/Fixed/"
+BUGGY_COMMAND="defects4j checkout -p "
+FIXED_COMMAND="defects4j checkout -p " 
+BUGGY_VERSION="b -w "
+FIXED_VERSION="f -w "
+
+# Generate Understand Report for Mockito 
+
+for i in {1..38}
+do 
+	# Checkout projects
+	mkdir -p $BUGGY_DIR"Mockito/$i" 
+	mkdir -p $FIXED_DIR"Mockito/$i"
+	
+	BUGGY_COMMAND=$BUGGY_COMMAND"Mockito -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Mockito/""$i"
+	FIXED_COMMAND=$FIXED_COMMAND"Mockito -v ""$i"$FIXED_VERSION$FIXED_DIR"Mockito/""$i"
+	
+	eval "$BUGGY_COMMAND"
+	eval "$FIXED_COMMAND"
+
+	# Generate Understand report for buggy version
+	cd /auto/ugrad_space/tunghn1/Buggy/Mockito
+	B_CREATE_DB="und create -db BMockito$i.udb -languages java"
+	B_ADD_PROJECT="und -db BMockito$i.udb add $i"
+	B_ANALYZE_PROJECT="und analyze BMockito$i.udb"
+	B_ADD_SETTINGS="und settings -MetricMetrics AltCountLineBlank AltCountLineComment AvgCyclomaticModified AvgEssential AvgLineBlank AvgLineComment CountClassCoupled CountDeclClass CountDeclClassVariable CountDeclFile CountDeclFileHeader CountDeclInstanceMethod CountDeclInstanceVariablePrivate CountDeclInstanceVariablePublic CountDeclMethodAll CountDeclMethodDefault CountDeclMethodPrivate CountDeclMethodPublic CountLine CountLineCode CountLineCodeExe CountLineInactive CountOutput CountPathLog CountStmt CountStmtEmpty Cyclomatic CyclomaticStrict Knots MaxCyclomaticModified MaxEssential MaxInheritanceTree MinEssentialKnots AltAvgLineBlank AltAvgLineComment AltCountLineCode AvgCyclomatic AvgCyclomaticStrict AvgLine AvgLineCode CountClassBase CountClassDerived CountDeclClassMethod CountDeclExecutableUnit CountDeclFileCode CountDeclFunction CountDeclInstanceVariable CountDeclInstanceVariableProtected CountDeclMethod CountDeclMethodConst CountDeclMethodFriend CountDeclMethodProtected CountInput CountLineBlank CountLineCodeDecl CountLineComment CountLinePreprocessor CountPath CountSemicolon CountStmtDecl CountStmtExe CyclomaticModified Essential MaxCyclomatic MaxCyclomaticStrict MaxEssentialKnots MaxNesting PercentLackOfCohesion SumCyclomatic SumCyclomaticStrict SumEssential SumCyclomaticModified RatioCommentToCode AltAvgLineCode BMockito$i.udb"
+	B_GENERATE_REPORTS="und metrics BMockito$i.udb"
+
+	eval "$B_CREATE_DB"
+	eval "$B_ADD_PROJECT"
+	eval "$B_ANALYZE_PROJECT"
+	eval "$B_ADD_SETTINGS"
+	eval "$B_GENERATE_REPORTS"
+
+	rm -rf "$i"
+	rm -rf *.udb
+
+	# Generate Understand report for fixed version
+	cd /auto/ugrad_space/tunghn1/Fixed/Mockito
+	F_CREATE_DB="und create -db FMockito$i.udb -languages java"
+	F_ADD_PROJECT="und -db FMockito$i.udb add $i"
+	F_ANALYZE_PROJECT="und analyze FMockito$i.udb"
+	F_ADD_SETTINGS="und settings -MetricMetrics AltCountLineBlank AltCountLineComment AvgCyclomaticModified AvgEssential AvgLineBlank AvgLineComment CountClassCoupled CountDeclClass CountDeclClassVariable CountDeclFile CountDeclFileHeader CountDeclInstanceMethod CountDeclInstanceVariablePrivate CountDeclInstanceVariablePublic CountDeclMethodAll CountDeclMethodDefault CountDeclMethodPrivate CountDeclMethodPublic CountLine CountLineCode CountLineCodeExe CountLineInactive CountOutput CountPathLog CountStmt CountStmtEmpty Cyclomatic CyclomaticStrict Knots MaxCyclomaticModified MaxEssential MaxInheritanceTree MinEssentialKnots AltAvgLineBlank AltAvgLineComment AltCountLineCode AvgCyclomatic AvgCyclomaticStrict AvgLine AvgLineCode CountClassBase CountClassDerived CountDeclClassMethod CountDeclExecutableUnit CountDeclFileCode CountDeclFunction CountDeclInstanceVariable CountDeclInstanceVariableProtected CountDeclMethod CountDeclMethodConst CountDeclMethodFriend CountDeclMethodProtected CountInput CountLineBlank CountLineCodeDecl CountLineComment CountLinePreprocessor CountPath CountSemicolon CountStmtDecl CountStmtExe CyclomaticModified Essential MaxCyclomatic MaxCyclomaticStrict MaxEssentialKnots MaxNesting PercentLackOfCohesion SumCyclomatic SumCyclomaticStrict SumEssential SumCyclomaticModified RatioCommentToCode AltAvgLineCode FMockito$i.udb"
+	F_GENERATE_REPORTS="und metrics FMockito$i.udb"
+
+	eval "$F_CREATE_DB"
+	eval "$F_ADD_PROJECT"
+	eval "$F_ANALYZE_PROJECT"
+	eval "$F_ADD_SETTINGS"
+	eval "$F_GENERATE_REPORTS"
+
+	rm -rf "$i"
+	rm -rf *.udb
+
+done
+

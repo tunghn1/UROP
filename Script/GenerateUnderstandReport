@@ -1,8 +1,0 @@
-#!/bin/bash
-
-und create -db buggy_db.udb -languages java 
-und -db buggy_db.udb add @BuggyFiles.txt
-und analyze buggy_db.udb
-und settings -MetricMetrics "AltCountLineBlank" "AltCountLineComment" "AvgCyclomaticModified" "AvgEssential" "AvgLineBlank" "AvgLineComment" "CountClassCoupled" "CountDeclClass" "CountDeclClassVariable" "CountDeclFile" "CountDeclFileHeader" "CountDeclInstanceMethod" "CountDeclInstanceVariablePrivate" "CountDeclInstanceVariablePublic" "CountDeclMethodAll" "CountDeclMethodDefault" "CountDeclMethodPrivate" "CountDeclMethodPublic" "CountLine" "CountLineCode" "CountLineCodeExe" "CountLineInactive" "CountOutput" "CountPathLog" "CountStmt" "CountStmtEmpty" "Cyclomatic" "CyclomaticStrict" "Knots" "MaxCyclomaticModified" "MaxEssential" "MaxInheritanceTree" "MinEssentialKnots" "AltAvgLineBlank" "AltAvgLineComment" "AltCountLineCode" "AvgCyclomatic" "AvgCyclomaticStrict" "AvgLine" "AvgLineCode" "CountClassBase" "CountClassDerived" "CountDeclClassMethod" "CountDeclExecutableUnit" "CountDeclFileCode" "CountDeclFunction" "CountDeclInstanceVariable" "CountDeclInstanceVariableProtected" "CountDeclMethod" "CountDeclMethodConst" "CountDeclMethodFriend" "CountDeclMethodProtected" "CountInput" "CountLineBlank" "CountLineCodeDecl" "CountLineComment" "CountLinePreprocessor" "CountPath" "CountSemicolon" "CountStmtDecl" "CountStmtExe" "CyclomaticModified" "Essential" "MaxCyclomatic" "MaxCyclomaticStrict" "MaxEssentialKnots" "MaxNesting" "PercentLackOfCohesion" "SumCyclomatic" "SumCyclomaticStrict" "SumEssential" "SumCyclomaticModified" "RatioCommentToCode" "AltAvgLineCode" buggy_db.udb
-und list -metrics settings buggy_db.udb
-und metrics buggy_db.udb

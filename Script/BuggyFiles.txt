@@ -1,6 +1,0 @@
-/home/tunghn1/time_buggy
-/home/tunghn1/mockito_buggy
-/home/tunghn1/math_buggy
-/home/tunghn1/lang_buggy
-/home/tunghn1/closure_buggy
-/home/tunghn1/chart_buggy

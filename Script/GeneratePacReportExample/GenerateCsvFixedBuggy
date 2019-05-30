@@ -1,0 +1,34 @@
+#!/bin/bash
+
+Cfg_Buggy_Dir="/home/ashiran/Tung/PAC/PathComplexity/scripts/cfgextractor/outputs"
+Cfg_Fixed_Dir="/home/ashiran/Tung/PAC/PathComplexity/scripts/cfgextractor/outputs"
+
+Pac_Cfg_Buggy_Dir="/home/ashiran/Tung/PAC/PathComplexity/scripts/cfgextractor/outputs/"
+Pac_Cfg_Fixed_Dir="/home/ashiran/Tung/PAC/PathComplexity/scripts/cfgextractor/outputs/"
+
+output="/home/ashiran/Tung/"
+
+# Closure
+# Note: 
+# It is better to completely generate all jar files before generating cfgs since you can control the process easier. 
+# If you want to run the script on multiple instances, you can create multiple PAC folder and use screen command. 
+# To save space, I delete all cfg files after having csv files
+for i in {1..176}
+do
+	# Generate cfgs 
+	cd /home/ashiran/Tung/PAC/PathComplexity/scripts/cfgextractor
+	python main.py -i "/home/ashiran/Tung/JarFiles/Bclosure$i.jar"
+	python main.py -i "/home/ashiran/Tung/JarFiles/Fclosure$i.jar"
+
+	# Generate csv files
+	cd /home/ashiran/Tung/PAC/PathComplexity/scripts
+	./complexities $Pac_Cfg_Buggy_Dir"Bclosure$i" > $output"Bclosure$i.csv"
+	./complexities $Pac_Cfg_Fixed_Dir"Fclosure$i" > $output"Fclosure$i.csv"
+
+	# Delete cfg files
+	cd /home/ashiran/Tung/PAC/PathComplexity/scripts/cfgextractor/outputs
+	rm -rf "Bclosure$i"
+	rm -rf "Fclosure$i"
+
+
+done

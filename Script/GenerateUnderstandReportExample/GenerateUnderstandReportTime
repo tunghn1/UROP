@@ -1,0 +1,120 @@
+#!/bin/bash
+
+# und create -db buggy_db.udb -languages java 
+# und -db buggy_db.udb add lang_1_buggy
+# und analyze buggy_db.udb
+# und settings -MetricMetrics "AltCountLineBlank" "AltCountLineComment" "AvgCyclomaticModified" "AvgEssential" "AvgLineBlank" "AvgLineComment" "CountClassCoupled" "CountDeclClass" "CountDeclClassVariable" "CountDeclFile" "CountDeclFileHeader" "CountDeclInstanceMethod" "CountDeclInstanceVariablePrivate" "CountDeclInstanceVariablePublic" "CountDeclMethodAll" "CountDeclMethodDefault" "CountDeclMethodPrivate" "CountDeclMethodPublic" "CountLine" "CountLineCode" "CountLineCodeExe" "CountLineInactive" "CountOutput" "CountPathLog" "CountStmt" "CountStmtEmpty" "Cyclomatic" "CyclomaticStrict" "Knots" "MaxCyclomaticModified" "MaxEssential" "MaxInheritanceTree" "MinEssentialKnots" "AltAvgLineBlank" "AltAvgLineComment" "AltCountLineCode" "AvgCyclomatic" "AvgCyclomaticStrict" "AvgLine" "AvgLineCode" "CountClassBase" "CountClassDerived" "CountDeclClassMethod" "CountDeclExecutableUnit" "CountDeclFileCode" "CountDeclFunction" "CountDeclInstanceVariable" "CountDeclInstanceVariableProtected" "CountDeclMethod" "CountDeclMethodConst" "CountDeclMethodFriend" "CountDeclMethodProtected" "CountInput" "CountLineBlank" "CountLineCodeDecl" "CountLineComment" "CountLinePreprocessor" "CountPath" "CountSemicolon" "CountStmtDecl" "CountStmtExe" "CyclomaticModified" "Essential" "MaxCyclomatic" "MaxCyclomaticStrict" "MaxEssentialKnots" "MaxNesting" "PercentLackOfCohesion" "SumCyclomatic" "SumCyclomaticStrict" "SumEssential" "SumCyclomaticModified" "RatioCommentToCode" "AltAvgLineCode" buggy_db.udb
+# und list -metrics settings buggy_db.udb
+# und metrics buggy_db.udb
+
+
+BUGGY_DIR="/auto/ugrad_space/tunghn1/Buggy/"
+FIXED_DIR="/auto/ugrad_space/tunghn1/Fixed/"
+BUGGY_COMMAND="defects4j checkout -p "
+FIXED_COMMAND="defects4j checkout -p " 
+BUGGY_VERSION="b -w "
+FIXED_VERSION="f -w "
+
+# Generate Understand Report for Time 
+
+# for i in {1..27}
+# do 
+# 	# Checkout projects
+# 	mkdir -p $BUGGY_DIR"Time/$i" 
+# 	mkdir -p $FIXED_DIR"Time/$i"
+	
+# 	BUGGY_COMMAND=$BUGGY_COMMAND"Time -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Time/""$i"
+# 	FIXED_COMMAND=$FIXED_COMMAND"Time -v ""$i"$FIXED_VERSION$FIXED_DIR"Time/""$i"
+	
+# 	eval "$BUGGY_COMMAND"
+# 	eval "$FIXED_COMMAND"
+
+# 	# Generate Understand report for buggy version
+# 	cd /auto/ugrad_space/tunghn1/Buggy/Time
+# 	B_CREATE_DB="und create -db Btime$i.udb -languages java"
+# 	B_ADD_PROJECT="und -db Btime$i.udb add $i"
+# 	B_ANALYZE_PROJECT="und analyze Btime$i.udb"
+# 	B_ADD_SETTINGS="und settings -MetricMetrics AltCountLineBlank AltCountLineComment AvgCyclomaticModified AvgEssential AvgLineBlank AvgLineComment CountClassCoupled CountDeclClass CountDeclClassVariable CountDeclFile CountDeclFileHeader CountDeclInstanceMethod CountDeclInstanceVariablePrivate CountDeclInstanceVariablePublic CountDeclMethodAll CountDeclMethodDefault CountDeclMethodPrivate CountDeclMethodPublic CountLine CountLineCode CountLineCodeExe CountLineInactive CountOutput CountPathLog CountStmt CountStmtEmpty Cyclomatic CyclomaticStrict Knots MaxCyclomaticModified MaxEssential MaxInheritanceTree MinEssentialKnots AltAvgLineBlank AltAvgLineComment AltCountLineCode AvgCyclomatic AvgCyclomaticStrict AvgLine AvgLineCode CountClassBase CountClassDerived CountDeclClassMethod CountDeclExecutableUnit CountDeclFileCode CountDeclFunction CountDeclInstanceVariable CountDeclInstanceVariableProtected CountDeclMethod CountDeclMethodConst CountDeclMethodFriend CountDeclMethodProtected CountInput CountLineBlank CountLineCodeDecl CountLineComment CountLinePreprocessor CountPath CountSemicolon CountStmtDecl CountStmtExe CyclomaticModified Essential MaxCyclomatic MaxCyclomaticStrict MaxEssentialKnots MaxNesting PercentLackOfCohesion SumCyclomatic SumCyclomaticStrict SumEssential SumCyclomaticModified RatioCommentToCode AltAvgLineCode Btime$i.udb"
+# 	B_GENERATE_REPORTS="und metrics Btime$i.udb"
+
+# 	eval "$B_CREATE_DB"
+# 	eval "$B_ADD_PROJECT"
+# 	eval "$B_ANALYZE_PROJECT"
+# 	eval "$B_ADD_SETTINGS"
+# 	eval "$B_GENERATE_REPORTS"
+
+# 	rm -rf "$i"
+# 	rm -rf *.udb
+
+# 	# Generate Understand report for fixed version
+# 	cd /auto/ugrad_space/tunghn1/Fixed/Time
+# 	F_CREATE_DB="und create -db Ftime$i.udb -languages java"
+# 	F_ADD_PROJECT="und -db Ftime$i.udb add $i"
+# 	F_ANALYZE_PROJECT="und analyze Ftime$i.udb"
+# 	F_ADD_SETTINGS="und settings -MetricMetrics AltCountLineBlank AltCountLineComment AvgCyclomaticModified AvgEssential AvgLineBlank AvgLineComment CountClassCoupled CountDeclClass CountDeclClassVariable CountDeclFile CountDeclFileHeader CountDeclInstanceMethod CountDeclInstanceVariablePrivate CountDeclInstanceVariablePublic CountDeclMethodAll CountDeclMethodDefault CountDeclMethodPrivate CountDeclMethodPublic CountLine CountLineCode CountLineCodeExe CountLineInactive CountOutput CountPathLog CountStmt CountStmtEmpty Cyclomatic CyclomaticStrict Knots MaxCyclomaticModified MaxEssential MaxInheritanceTree MinEssentialKnots AltAvgLineBlank AltAvgLineComment AltCountLineCode AvgCyclomatic AvgCyclomaticStrict AvgLine AvgLineCode CountClassBase CountClassDerived CountDeclClassMethod CountDeclExecutableUnit CountDeclFileCode CountDeclFunction CountDeclInstanceVariable CountDeclInstanceVariableProtected CountDeclMethod CountDeclMethodConst CountDeclMethodFriend CountDeclMethodProtected CountInput CountLineBlank CountLineCodeDecl CountLineComment CountLinePreprocessor CountPath CountSemicolon CountStmtDecl CountStmtExe CyclomaticModified Essential MaxCyclomatic MaxCyclomaticStrict MaxEssentialKnots MaxNesting PercentLackOfCohesion SumCyclomatic SumCyclomaticStrict SumEssential SumCyclomaticModified RatioCommentToCode AltAvgLineCode Ftime$i.udb"
+# 	F_GENERATE_REPORTS="und metrics Ftime$i.udb"
+
+# 	eval "$F_CREATE_DB"
+# 	eval "$F_ADD_PROJECT"
+# 	eval "$F_ANALYZE_PROJECT"
+# 	eval "$F_ADD_SETTINGS"
+# 	eval "$F_GENERATE_REPORTS"
+
+# 	rm -rf "$i"
+# 	rm -rf *.udb
+
+# done
+
+# Generate Understand Report for Math
+for i in {1..106}
+do 
+	# Checkout projects
+	mkdir -p $BUGGY_DIR"Math/$i" 
+	mkdir -p $FIXED_DIR"Math/$i"
+	
+	BUGGY_COMMAND=$BUGGY_COMMAND"Math -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Math/""$i"
+	FIXED_COMMAND=$FIXED_COMMAND"Math -v ""$i"$FIXED_VERSION$FIXED_DIR"Math/""$i"
+	
+	eval "$BUGGY_COMMAND"
+	eval "$FIXED_COMMAND"
+
+	# Generate Understand report for buggy version
+	cd /auto/ugrad_space/tunghn1/Buggy/Math
+	B_CREATE_DB="und create -db Bmath$i.udb -languages java"
+	B_ADD_PROJECT="und -db Bmath$i.udb add $i"
+	B_ANALYZE_PROJECT="und analyze Bmath$i.udb"
+	B_ADD_SETTINGS="und settings -MetricMetrics AltCountLineBlank AltCountLineComment AvgCyclomaticModified AvgEssential AvgLineBlank AvgLineComment CountClassCoupled CountDeclClass CountDeclClassVariable CountDeclFile CountDeclFileHeader CountDeclInstanceMethod CountDeclInstanceVariablePrivate CountDeclInstanceVariablePublic CountDeclMethodAll CountDeclMethodDefault CountDeclMethodPrivate CountDeclMethodPublic CountLine CountLineCode CountLineCodeExe CountLineInactive CountOutput CountPathLog CountStmt CountStmtEmpty Cyclomatic CyclomaticStrict Knots MaxCyclomaticModified MaxEssential MaxInheritanceTree MinEssentialKnots AltAvgLineBlank AltAvgLineComment AltCountLineCode AvgCyclomatic AvgCyclomaticStrict AvgLine AvgLineCode CountClassBase CountClassDerived CountDeclClassMethod CountDeclExecutableUnit CountDeclFileCode CountDeclFunction CountDeclInstanceVariable CountDeclInstanceVariableProtected CountDeclMethod CountDeclMethodConst CountDeclMethodFriend CountDeclMethodProtected CountInput CountLineBlank CountLineCodeDecl CountLineComment CountLinePreprocessor CountPath CountSemicolon CountStmtDecl CountStmtExe CyclomaticModified Essential MaxCyclomatic MaxCyclomaticStrict MaxEssentialKnots MaxNesting PercentLackOfCohesion SumCyclomatic SumCyclomaticStrict SumEssential SumCyclomaticModified RatioCommentToCode AltAvgLineCode Bmath$i.udb"
+	B_GENERATE_REPORTS="und metrics Bmath$i.udb"
+
+	eval "$B_CREATE_DB"
+	eval "$B_ADD_PROJECT"
+	eval "$B_ANALYZE_PROJECT"
+	eval "$B_ADD_SETTINGS"
+	eval "$B_GENERATE_REPORTS"
+
+	rm -rf "$i"
+	rm -rf *.udb
+
+	# Generate Understand report for fixed version
+	cd /auto/ugrad_space/tunghn1/Fixed/Math
+	F_CREATE_DB="und create -db Fmath$i.udb -languages java"
+	F_ADD_PROJECT="und -db Fmath$i.udb add $i"
+	F_ANALYZE_PROJECT="und analyze Fmath$i.udb"
+	F_ADD_SETTINGS="und settings -MetricMetrics AltCountLineBlank AltCountLineComment AvgCyclomaticModified AvgEssential AvgLineBlank AvgLineComment CountClassCoupled CountDeclClass CountDeclClassVariable CountDeclFile CountDeclFileHeader CountDeclInstanceMethod CountDeclInstanceVariablePrivate CountDeclInstanceVariablePublic CountDeclMethodAll CountDeclMethodDefault CountDeclMethodPrivate CountDeclMethodPublic CountLine CountLineCode CountLineCodeExe CountLineInactive CountOutput CountPathLog CountStmt CountStmtEmpty Cyclomatic CyclomaticStrict Knots MaxCyclomaticModified MaxEssential MaxInheritanceTree MinEssentialKnots AltAvgLineBlank AltAvgLineComment AltCountLineCode AvgCyclomatic AvgCyclomaticStrict AvgLine AvgLineCode CountClassBase CountClassDerived CountDeclClassMethod CountDeclExecutableUnit CountDeclFileCode CountDeclFunction CountDeclInstanceVariable CountDeclInstanceVariableProtected CountDeclMethod CountDeclMethodConst CountDeclMethodFriend CountDeclMethodProtected CountInput CountLineBlank CountLineCodeDecl CountLineComment CountLinePreprocessor CountPath CountSemicolon CountStmtDecl CountStmtExe CyclomaticModified Essential MaxCyclomatic MaxCyclomaticStrict MaxEssentialKnots MaxNesting PercentLackOfCohesion SumCyclomatic SumCyclomaticStrict SumEssential SumCyclomaticModified RatioCommentToCode AltAvgLineCode Fmath$i.udb"
+	F_GENERATE_REPORTS="und metrics Fmath$i.udb"
+
+	eval "$F_CREATE_DB"
+	eval "$F_ADD_PROJECT"
+	eval "$F_ANALYZE_PROJECT"
+	eval "$F_ADD_SETTINGS"
+	eval "$F_GENERATE_REPORTS"
+
+	rm -rf "$i"
+	rm -rf *.udb
+
+done
+# Generate Understand Report for Lang
+
+# Generate Understand Report for Math
+
+# Generate Understand Report for Closure

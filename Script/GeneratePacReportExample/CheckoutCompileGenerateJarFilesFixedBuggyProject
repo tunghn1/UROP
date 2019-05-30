@@ -1,0 +1,138 @@
+#!/bin/bash
+
+BUGGY_DIR="/home/tunghn1/Buggy/"
+FIXED_DIR="/home/tunghn1/Fixed/"
+BUGGY_COMMAND="defects4j checkout -p "
+FIXED_COMMAND="defects4j checkout -p " 
+BUGGY_VERSION="b -w "
+FIXED_VERSION="f -w "
+
+# Checkout, compile, generate Jar files, and delete source code for Closure 
+# Note: 
+# The necessary files to compile jar files may be in different location than /build/classes/com
+# Obserse the output jar files to know if location is different. 
+# Since the machine may not have enough space, I usually delete the source code to have some space. 
+# Nonetheless, you can use undergrat space since it is huge. 
+
+for i in {1..176}
+do 
+	
+	# Checkout Fixed Closure
+	mkdir -p $FIXED_DIR"Closure/$i"
+	FIXED_COMMAND=$FIXED_COMMAND"Closure -v ""$i"$FIXED_VERSION$FIXED_DIR"Closure/""$i"
+	eval "$FIXED_COMMAND"
+
+	# Compile Fixed
+	cd $FIXED_DIR"Closure/$i"
+	defects4j compile
+
+	# Generate JarFiles for fixed 
+	cd $FIXED_DIR"Closure/$i/build/classes/com"
+	jar cvf closure.jar google
+	movF="mv closure.jar /home/tunghn1/JarFiles/Fclosure$i.jar"
+	eval "$movF"
+
+	# Delete Fixed version
+	cd /home/tunghn1/Fixed/Closure
+	rm -rf  *
+
+	# Checkout Buggy Closure
+	mkdir -p $BUGGY_DIR"Closure/$i" 	
+	BUGGY_COMMAND=$BUGGY_COMMAND"Closure -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Closure/""$i"
+	eval "$BUGGY_COMMAND"
+
+	# Compile Buggy
+	cd $BUGGY_DIR"Closure/$i"
+	defects4j compile
+
+	# Generate JarFiles for buggy
+	cd $BUGGY_DIR"Closure/$i/build/classes/com"
+	jar cvf closure.jar google
+	movB="mv closure.jar /home/tunghn1/JarFiles/Bclosure$i.jar"
+	eval "$movB"
+
+	# Delete Buggy
+	cd /home/tunghn1/Buggy/Closure
+	rm -rf  *
+
+done
+
+# Checkout Lang
+# for i in {1..10}
+# do 
+# 	mkdir -p $BUGGY_DIR"Lang/""$i" 
+# 	mkdir -p $FIXED_DIR"Lang/""$i"
+	
+# 	BUGGY_COMMAND=$BUGGY_COMMAND"Lang -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Lang/""$i"
+# 	FIXED_COMMAND=$FIXED_COMMAND"Lang -v ""$i"$FIXED_VERSION$FIXED_DIR"Lang/""$i"
+	
+# 	eval "$BUGGY_COMMAND"
+# 	eval "$FIXED_COMMAND"
+
+# 	# defects4j checkout -p Time -v 1b -w /home/tunghn1/Byggy/Time/$i
+# 	# defects4j checkout -p Time -v 1f -w /home/tunghn1/Fixed/Time/$i
+# done
+
+# Checkout Math
+# for i in {1..106}
+# do 
+# 	mkdir -p $BUGGY_DIR"Math/""$i" 
+# 	mkdir -p $FIXED_DIR"Math/""$i"
+	
+# 	BUGGY_COMMAND=$BUGGY_COMMAND"Math -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Math/""$i"
+# 	FIXED_COMMAND=$FIXED_COMMAND"Math -v ""$i"$FIXED_VERSION$FIXED_DIR"Math/""$i"
+	
+# 	eval "$BUGGY_COMMAND"
+# 	eval "$FIXED_COMMAND"
+
+# 	# defects4j checkout -p Time -v 1b -w /home/tunghn1/Byggy/Time/$i
+# 	# defects4j checkout -p Time -v 1f -w /home/tunghn1/Fixed/Time/$i
+# done
+
+# Checkout Mockito
+# for i in {1..38}
+# do 
+# 	mkdir -p $BUGGY_DIR"Mockito/""$i" 
+# 	mkdir -p $FIXED_DIR"Mockito/""$i"
+	
+# 	BUGGY_COMMAND=$BUGGY_COMMAND"Mockito -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Mockito/""$i"
+# 	FIXED_COMMAND=$FIXED_COMMAND"Mockito -v ""$i"$FIXED_VERSION$FIXED_DIR"Mockito/""$i"
+	
+# 	eval "$BUGGY_COMMAND"
+# 	eval "$FIXED_COMMAND"
+
+# 	# defects4j checkout -p Time -v 1b -w /home/tunghn1/Byggy/Time/$i
+# 	# defects4j checkout -p Time -v 1f -w /home/tunghn1/Fixed/Time/$i
+# done
+
+# Checkout Time 
+# for i in {1..27}
+# do 
+# 	mkdir -p $BUGGY_DIR"Time/""$i" 
+# 	mkdir -p $FIXED_DIR"Time/""$i"
+	
+# 	BUGGY_COMMAND=$BUGGY_COMMAND"Time -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Time/""$i"
+# 	FIXED_COMMAND=$FIXED_COMMAND"Time -v ""$i"$FIXED_VERSION$FIXED_DIR"Time/""$i"
+	
+# 	eval "$BUGGY_COMMAND"
+# 	eval "$FIXED_COMMAND"
+
+# 	# defects4j checkout -p Time -v 1b -w /home/tunghn1/Byggy/Time/$i
+# 	# defects4j checkout -p Time -v 1f -w /home/tunghn1/Fixed/Time/$i
+# done
+
+# Checkout Chart
+# for i in {24..26}
+# do 
+# 	mkdir -p $BUGGY_DIR"Chart/""$i" 
+# 	mkdir -p $FIXED_DIR"Chart/""$i"
+	
+# 	BUGGY_COMMAND=$BUGGY_COMMAND"Chart -v ""$i"$BUGGY_VERSION$BUGGY_DIR"Chart/""$i"
+# 	FIXED_COMMAND=$FIXED_COMMAND"Chart -v ""$i"$FIXED_VERSION$FIXED_DIR"Chart/""$i"
+	
+# 	eval "$BUGGY_COMMAND"
+# 	eval "$FIXED_COMMAND"
+
+# 	# defects4j checkout -p Time -v 1b -w /home/tunghn1/Byggy/Time/$i
+# 	# defects4j checkout -p Time -v 1f -w /home/tunghn1/Fixed/Time/$i
+# done
